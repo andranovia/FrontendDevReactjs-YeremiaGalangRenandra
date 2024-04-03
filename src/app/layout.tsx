@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { ReactQueryProvider } from "@/utils/ReactQueryProvider";
+import { RestaurantFilterProvider } from "@/context/RestaurantFilterContext";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -21,7 +22,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <ReactQueryProvider>{children}</ReactQueryProvider>
+        <ReactQueryProvider>
+          <RestaurantFilterProvider>{children}</RestaurantFilterProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );

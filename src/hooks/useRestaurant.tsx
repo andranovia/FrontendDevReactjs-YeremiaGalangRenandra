@@ -1,5 +1,6 @@
 import getRestaurant from "@/utils/getRestaurant";
 import { useQuery } from "@tanstack/react-query";
+
 type Restaurants = {
   id: number;
   title: string;

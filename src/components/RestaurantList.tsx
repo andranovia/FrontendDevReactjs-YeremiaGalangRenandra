@@ -7,13 +7,29 @@ import { useRestaurantFilter } from "@/context/RestaurantFilterContext";
 
 const RestaurantList = () => {
   const { restaurants, isLoading } = useRestaurant();
-  const { openFilter } = useRestaurantFilter();
+  const { openFilter, categoryFilter, priceFilter } = useRestaurantFilter();
 
-  const restaurantsData = openFilter
-    ? restaurants?.filter((item) => item?.open === true)
-    : restaurants;
+  let restaurantsData = restaurants;
 
-  console.log(restaurants);
+  if (restaurantsData) {
+    if (priceFilter) {
+      restaurantsData = restaurantsData.filter(
+        (item) => item.price === priceFilter
+      );
+    }
+
+    if (categoryFilter && restaurantsData.length > 0) {
+      restaurantsData = restaurantsData.filter((item) =>
+        item.categories.some((category) => category.name === categoryFilter)
+      );
+    }
+
+    if (openFilter && restaurantsData.length > 0) {
+      restaurantsData = restaurantsData.filter((item) => item.open === true);
+    }
+  } else {
+    null;
+  }
 
   return (
     <div className="w-full lg:px-20  flex flex-col lg:items-start items-center pt-10 lg:mt-10 text-primary">

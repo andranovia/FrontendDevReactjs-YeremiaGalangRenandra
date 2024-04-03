@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { AnimatePresence, useAnimation, motion } from "framer-motion";
 import { useCategory } from "@/hooks/useCategory";
+import { useRestaurantFilter } from "@/context/RestaurantFilterContext";
 
 const NavigationCategory = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownControls = useAnimation();
   const { categories } = useCategory();
+  const { categoryFilter, setCategoryFilter } = useRestaurantFilter();
 
   const handleOpenDropdown = () => {
     dropdownControls.start("animate");
@@ -41,7 +43,14 @@ const NavigationCategory = () => {
                 <div className="grid grid-cols-3 gap-2 w-full">
                   {categories?.map((category, index) => (
                     <React.Fragment key={index}>
-                      <span className=" py-2 text-sm text-gray-400 rounded-md  cursor-pointer ">
+                      <span
+                        onClick={() => setCategoryFilter(category.name)}
+                        className={` py-2 text-sm  ${
+                          categoryFilter === category.name
+                            ? "text-primary"
+                            : "text-gray-400"
+                        } rounded-md  cursor-pointer `}
+                      >
                         {category.name}
                       </span>
                     </React.Fragment>

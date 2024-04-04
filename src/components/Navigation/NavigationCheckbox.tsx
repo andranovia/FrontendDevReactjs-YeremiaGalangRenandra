@@ -3,6 +3,7 @@ import React from "react";
 
 const NavigationCheckbox = () => {
   const { setOpenFilter, openFilter } = useRestaurantFilter();
+
   return (
     <div className="px-4 py-3  gap-2  rounded-lg flex justify-center items-center">
       <input

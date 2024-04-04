@@ -16,8 +16,7 @@ const ratingFn = (rating: number) => {
 
 const RestaurantCard = ({ restaurantData }: RestaurantCardProps) => {
   const rating = ratingFn(restaurantData?.average_rating);
-  const firstCategory = restaurantData?.categories[1];
-
+  const firstCategory = restaurantData?.categories[0];
   return (
     <>
       <div className="flex w-full h-full flex-col items-start rounded-lg bg-white shadow-sm  pb-2   ">

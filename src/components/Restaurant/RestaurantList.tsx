@@ -52,7 +52,7 @@ const RestaurantList = () => {
               ))}
       </div>
       {categoryFilter || openFilter || priceFilter ? null : (
-        <div className="my-20 w-1/3">
+        <div className="my-10 lg:my-20 w-full lg:w-1/3">
           {!showAllRestaurants ? (
             <button
               className="w-full py-2 border-2 border-primary uppercase text-primary rounded-md"

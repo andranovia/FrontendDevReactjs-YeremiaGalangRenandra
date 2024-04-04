@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import axiosInstance from "./axiosInstance";
 
 type postUserRegisterProps = {
@@ -14,6 +15,7 @@ type postUserLoginProps = {
     email: string;
     password: string;
   };
+  setValidationErrors: Dispatch<SetStateAction<string | undefined>>;
 };
 
 export const postUserRegister = async ({
@@ -36,6 +38,7 @@ export const postUserRegister = async ({
 
 export const postUserLogin = async ({
   postUserLoginData,
+  setValidationErrors,
 }: postUserLoginProps) => {
   try {
     const payload = {
@@ -46,7 +49,11 @@ export const postUserLogin = async ({
     const response = await axiosInstance.post("/api/v1/auth/login", payload);
     localStorage.setItem("accessToken", response.data.token);
 
-    return response.data;
+    if (response.data.success === true) {
+      return response.data;
+    } else {
+      setValidationErrors(response.data.message);
+    }
   } catch (error) {
     console.error(error);
   }

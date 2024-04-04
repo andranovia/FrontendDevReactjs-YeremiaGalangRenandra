@@ -3,6 +3,7 @@
 import { useUserData } from "@/context/UserContext";
 import { useAuth } from "@/hooks/useAuth";
 import { AnimatePresence, motion, useAnimation } from "framer-motion";
+import Link from "next/link";
 import React, { useState } from "react";
 
 const Header = () => {
@@ -58,9 +59,11 @@ const Header = () => {
             </div>
           </>
         ) : (
-          <button className="py-2 text-white rounded-md px-4 bg-primary">
-            Login
-          </button>
+          <Link href={"/auth/login"}>
+            <button className="py-2 text-white rounded-md px-4 bg-primary">
+              Login
+            </button>
+          </Link>
         )}
       </div>
     </div>

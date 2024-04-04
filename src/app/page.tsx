@@ -1,7 +1,7 @@
 import Header from "@/components/Header";
 import Index from "@/components/Index";
-import Navigation from "@/components/Navigation";
-import RestaurantList from "@/components/RestaurantList";
+import Navigation from "@/components/Navigation/Navigation";
+import RestaurantList from "@/components/Restaurant/RestaurantList";
 import Image from "next/image";
 
 export default function Home() {

@@ -1,13 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
-import {
-  postUserLogin,
-  postUserRegister,
-  postUserlogout,
-} from "@/utils/mutateUser";
+import { postUserLogin, postUserlogout } from "@/utils/mutateUser";
 import { useUserData } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
-interface useAuthProps {
+type useAuthProps = {
   registerData?: {
     name: string;
     email: string;
@@ -18,7 +15,7 @@ interface useAuthProps {
     email: string;
     password: string;
   };
-}
+};
 
 export type UserData =
   | {
@@ -27,22 +24,26 @@ export type UserData =
     }
   | undefined;
 
-export const useAuth = ({ registerData, loginData }: useAuthProps = {}) => {
+export type validationError = {
+  message: string;
+};
+
+export const useAuth = ({ loginData }: useAuthProps = {}) => {
   const { setUserData } = useUserData();
   const router = useRouter();
-  //   const [validationErrors, setValidationErrors] = useState<ValidationErrors>(
-  //     {}
-  //   );
 
-  const { mutateAsync: registerAction } = useMutation({
-    mutationFn: () => postUserRegister({ postUserRegisterData: registerData }),
-  });
+  const [validationErrors, setValidationErrors] = useState<string | undefined>(
+    undefined
+  );
 
   const { mutateAsync: loginAction } = useMutation({
-    mutationFn: () => postUserLogin({ postUserLoginData: loginData }),
+    mutationFn: () =>
+      postUserLogin({
+        postUserLoginData: loginData,
+        setValidationErrors: setValidationErrors,
+      }),
     onSuccess: (data: UserData) => {
       setUserData(data);
-      router.push("/");
     },
   });
 
@@ -55,8 +56,8 @@ export const useAuth = ({ registerData, loginData }: useAuthProps = {}) => {
   });
 
   return {
-    registerAction,
     loginAction,
     logoutAction,
+    validationErrors,
   };
 };

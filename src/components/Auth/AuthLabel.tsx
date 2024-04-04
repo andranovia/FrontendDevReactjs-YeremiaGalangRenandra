@@ -1,6 +1,6 @@
 const AuthLabel = ({ className, children, ...props }: any) => (
   <label
-    className={`${className} block font-medium text-sm text-gray-700`}
+    className={`${className} block font-medium text-lg text-gray-700`}
     {...props}
   >
     {children}

@@ -4,6 +4,7 @@ import React from "react";
 import RestaurantCard from "./RestaurantCard";
 import { useRestaurant } from "@/hooks/useRestaurant";
 import { useRestaurantFilter } from "@/context/RestaurantFilterContext";
+import RestaurantCardSkeleton from "./RestaurantCardSkeleton";
 
 const RestaurantList = () => {
   const { restaurants, isLoading } = useRestaurant();
@@ -33,12 +34,16 @@ const RestaurantList = () => {
 
   return (
     <div className="w-full lg:px-20  flex flex-col lg:items-start items-center pt-10 lg:mt-10 text-primary">
-      <div className="grid grid-cols-2 gap-4 items-center">
-        {restaurantsData?.map((restaurant, index) => (
-          <React.Fragment key={index}>
-            <RestaurantCard restaurantData={restaurant} />
-          </React.Fragment>
-        ))}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 items-center w-full">
+        {isLoading
+          ? Array.from({ length: 4 }, (_, index) => (
+              <RestaurantCardSkeleton key={index} />
+            ))
+          : restaurantsData?.map((restaurant, index) => (
+              <React.Fragment key={index}>
+                <RestaurantCard restaurantData={restaurant} />
+              </React.Fragment>
+            ))}
       </div>
     </div>
   );

@@ -1,21 +1,11 @@
+import { RestaurantItem } from "@/hooks/useRestaurant";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 
 type RestaurantCardProps = {
-  restaurantData: {
-    id: number;
-    title: string;
-    img: string;
-    rating: number;
-    open: boolean;
-    price: string;
-    categories: {
-      id: number;
-      name: string;
-    }[];
-  };
+  restaurantData: RestaurantItem;
 };
 
 const ratingFn = (rating: number) => {
@@ -25,16 +15,14 @@ const ratingFn = (rating: number) => {
 };
 
 const RestaurantCard = ({ restaurantData }: RestaurantCardProps) => {
-  const rating = ratingFn(restaurantData.rating);
-  const firstCategory = restaurantData.categories[1];
+  const rating = ratingFn(restaurantData?.average_rating);
+  const firstCategory = restaurantData?.categories[1];
 
   return (
     <>
-      <div className="flex flex-col items-start rounded-lg bg-white shadow-sm  pb-2   ">
+      <div className="flex w-full h-full flex-col items-start rounded-lg bg-white shadow-sm  pb-2   ">
         <Image
-          src={
-            "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          }
+          src={restaurantData.img[0]}
           alt=""
           width={200}
           height={200}
@@ -52,7 +40,7 @@ const RestaurantCard = ({ restaurantData }: RestaurantCardProps) => {
           </div>
           <div className="flex justify-between w-full mt-2 items-center pr-2">
             <h1 className="text-xs opacity-80">
-              {firstCategory.name} - {restaurantData.price}
+              {firstCategory?.name} - {restaurantData.price}
             </h1>
             <div className="flex justify-center items-center gap-2">
               <h3 className="text-xs hidden lg:block uppercase font-light">

@@ -1,6 +1,6 @@
 "use client";
 
-import RestaurantDetailInfo from "@/components/RestaurantDetailInfo";
+import RestaurantDetailInfo from "@/components/Restaurant/RestaurantDetailInfo";
 import { RestaurantItem } from "@/hooks/useRestaurant";
 import { getRestaurantDetail } from "@/utils/getRestaurant";
 import { useQuery } from "@tanstack/react-query";
@@ -19,7 +19,9 @@ const RestaurantDetail = ({ params }: RestaurantDetailProps) => {
 
   return (
     <div>
-      <RestaurantDetailInfo restaurantsDetail={restaurantsDetail} />
+      {restaurantsDetail && (
+        <RestaurantDetailInfo restaurantsDetail={restaurantsDetail} />
+      )}
     </div>
   );
 };

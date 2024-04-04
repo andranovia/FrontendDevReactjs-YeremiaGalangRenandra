@@ -8,7 +8,7 @@ type restaurant = {
   title: string;
   img: string;
   rating: number;
-  open: 1 | 0;
+  open: string;
   price: string;
   categories: {
     id: number;
@@ -23,9 +23,11 @@ export const getRestaurant = async () => {
 
         const data = await response.data.map((item: restaurant)=> ({
           ...item,
-          open: item.open === 1 ? true : false,
+          open: item.open === "1" ? true : false,
+     
           img: JSON.parse(item.img)
         }));
+   
         
         return data;
         

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import { useRestaurant } from "@/hooks/useRestaurant";
 import { useRestaurantFilter } from "@/context/RestaurantFilterContext";
@@ -9,7 +9,11 @@ import RestaurantCardSkeleton from "./RestaurantCardSkeleton";
 const RestaurantList = () => {
   const { restaurants, isLoading } = useRestaurant();
   const { openFilter, categoryFilter, priceFilter } = useRestaurantFilter();
+  const [showAllRestaurants, setShowAllRestaurants] = useState(false);
 
+  const handleShowMore = () => {
+    setShowAllRestaurants(!showAllRestaurants);
+  };
   let restaurantsData = restaurants;
 
   if (restaurantsData) {
@@ -33,18 +37,39 @@ const RestaurantList = () => {
   }
 
   return (
-    <div className="w-full lg:px-20  flex flex-col lg:items-start items-center pt-10 lg:mt-10 text-primary">
+    <div className="w-full lg:px-20  flex flex-col  items-center pt-10 lg:mt-10 text-primary">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 items-center w-full">
         {isLoading
           ? Array.from({ length: 4 }, (_, index) => (
               <RestaurantCardSkeleton key={index} />
             ))
-          : restaurantsData?.map((restaurant, index) => (
-              <React.Fragment key={index}>
-                <RestaurantCard restaurantData={restaurant} />
-              </React.Fragment>
-            ))}
+          : restaurantsData
+              ?.slice(0, showAllRestaurants ? restaurantsData.length : 8)
+              .map((restaurant, index) => (
+                <React.Fragment key={index}>
+                  <RestaurantCard restaurantData={restaurant} />
+                </React.Fragment>
+              ))}
       </div>
+      {categoryFilter || openFilter || priceFilter ? null : (
+        <div className="my-20 w-1/3">
+          {!showAllRestaurants ? (
+            <button
+              className="w-full py-2 border-2 border-primary uppercase text-primary rounded-md"
+              onClick={handleShowMore}
+            >
+              Show More
+            </button>
+          ) : (
+            <button
+              className="w-full py-2 border-2 border-primary uppercase text-primary rounded-md"
+              onClick={handleShowMore}
+            >
+              Show Less
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 };

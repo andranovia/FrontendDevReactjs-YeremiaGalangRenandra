@@ -44,6 +44,7 @@ export const useAuth = ({ loginData }: useAuthProps = {}) => {
       }),
     onSuccess: (data: UserData) => {
       setUserData(data);
+      router.push("/");
     },
   });
 

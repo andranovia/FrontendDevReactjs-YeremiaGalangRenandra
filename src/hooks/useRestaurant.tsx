@@ -34,6 +34,7 @@ export function useRestaurant() {
     queryKey: ["restaurant"],
     queryFn: () => getRestaurant(),
   });
+  console.log(restaurants);
 
   return { restaurants, isLoading };
 }

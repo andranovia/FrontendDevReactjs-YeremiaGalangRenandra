@@ -47,6 +47,7 @@ export const postUserLogin = async ({
     };
 
     const response = await axiosInstance.post("/api/v1/auth/login", payload);
+
     localStorage.setItem("accessToken", response.data.token);
 
     if (response.data.success === true) {

@@ -29,7 +29,7 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 ## Default Credentials
 
-- Username: user1212
+- Email: user1212@gmail.com
 - Password: 121212
 
 

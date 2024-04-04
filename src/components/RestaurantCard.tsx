@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { FaStar } from "react-icons/fa";
 
@@ -27,7 +28,6 @@ const RestaurantCard = ({ restaurantData }: RestaurantCardProps) => {
   const rating = ratingFn(restaurantData.rating);
   const firstCategory = restaurantData.categories[1];
 
-  console.table(restaurantData);
   return (
     <>
       <div className="flex flex-col items-start rounded-lg bg-white shadow-sm  pb-2   ">
@@ -67,9 +67,11 @@ const RestaurantCard = ({ restaurantData }: RestaurantCardProps) => {
           </div>
         </div>
         <div className="w-full px-2  text-center ">
-          <h1 className="text-white  bg-primary py-1 lg:py-2 rounded-sm mt-2">
-            Learn More
-          </h1>
+          <Link href={`/detail/${restaurantData.id}`}>
+            <h1 className="text-white  bg-primary py-1 lg:py-2 rounded-sm mt-2">
+              Learn More
+            </h1>
+          </Link>
         </div>
       </div>
     </>

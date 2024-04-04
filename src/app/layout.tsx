@@ -3,6 +3,8 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { ReactQueryProvider } from "@/utils/ReactQueryProvider";
 import { RestaurantFilterProvider } from "@/context/RestaurantFilterContext";
+import { UserContextProvider } from "@/context/UserContext";
+import Header from "@/components/Header";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -23,7 +25,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={poppins.className}>
         <ReactQueryProvider>
-          <RestaurantFilterProvider>{children}</RestaurantFilterProvider>
+          <UserContextProvider>
+            <RestaurantFilterProvider>{children}</RestaurantFilterProvider>
+          </UserContextProvider>
         </ReactQueryProvider>
       </body>
     </html>

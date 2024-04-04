@@ -34,4 +34,20 @@ export const getRestaurant = async () => {
       }
 }
 
+export const getRestaurantDetail = async (id: string) => {
+  try {
+
+      const response = await axiosInstance.get(`/api/v1/restaurants/${id}`);
+
+      const data = await response.data
+      
+      return data;
+      
+    } catch (error) {
+      console.error("Error fetching restaurants", error);
+      throw error;
+    }
+}
+
+
 export default getRestaurant

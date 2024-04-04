@@ -20,17 +20,17 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 ## Project Information
 
-React.js version: 18
-Next.js version: 14
-React Query version: v5
-Tailwind CSS
-Framer Motion
-React Leaflet
+- React.js version: 18
+- Next.js version: 14
+- React Query version: v5
+- Tailwind CSS
+- Framer Motion
+- React Leaflet
 
 ## Default Credentials
 
-Username: user1212
-Password: 121212
+- Username: user1212
+- Password: 121212
 
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
